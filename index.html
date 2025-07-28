@@ -1,25 +1,220 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<!-- get icons from https://www.favicon.cc -->
-<link rel="manifest" href="manifest.json" /> <!--for android-->
-    <title>Starter HTML JS CSS</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nutrition Explorer</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="main.js" defer></script>
 </head>
 <body>
-    <h1>MCQ Quiz</h1>
-    <header><h1>My Web App!</h1></header>
-<main>
-Contents here test
-</main>
-<footer>
-<img id="qrCodeImg" src="qrcodeimg.png">
-</footer>
+  <!-- Header -->
+  <header>
+    <h1 id="home-nav" class="home-btn">Nutrition</h1>
+    <button id="hamBtn" class="hamBtn">☰</button>
+    <nav id="main-nav" class="nav">
+      <button class="nav-btn" id="macronutrients-btn">Macronutrients</button>
+      <button class="nav-btn" id="micronutrients-btn">Micronutrients</button>
+      <button class="nav-btn" id="guidelines-btn">Guidelines</button>
+      <button class="nav-btn" id="labels-btn">Food Labels</button>
+      <button class="nav-btn" id="minigame-btn">Mini-Game</button>
+      <button class="nav-btn" id="quiz-btn">Quiz</button>
+    </nav>
+  </header>
+
+  <!-- Panels Container -->
+  <main>
+    <!-- HOME PANEL -->
+    <section id="home" class="panel active">
+  <div class="text-box">
+    <h2>Welcome to Nutrition Explorer!</h2>
+    <p>Learn about healthy eating, nutrients, and food choices.</p>
+  </div>
+</section>
+
+
+    <!-- MACRONUTRIENTS -->
+    <section id="macronutrients" class="panel">
+  <h3>Macronutrients</h3>
+  <div id="macro-video">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/smPR215SRzM?si=t8QKTlfnyYgA2cNu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  
+</div>
+
+  <div class="slider-controls">
+    <button id="prevMacro"><</button>
+    <button id="nextMacro">></button>
+  </div>
+  <div class="macro-slider">
+    <article class="macro-slide active" id="carbs">
+      <h4>Carbohydrates</h4>
+      <p>Carbohydrates are the main energy source for your body and are found in various foods like fruits, vegetables, grains, and dairy products.<br>Carbohydrates are classified into sugars, starches, and fiber, each playing a unique role in providing energy and supporting bodily functions. </p>
+      <img src="images/carbohydrates.png" alt="Carbohydrates Image">
+      
+    <div class="carb-types">
+  <div class="carb-card">
+    <h5>Sugars</h5>
+    <div class="carb-popup">
+      <p>Simple carbs that are quickly digested. Found in fruits, sweets, and soft drinks.</p>
+    </div>
+  </div>
+  <div class="carb-card">
+    <h5>Starches</h5>
+    <div class="carb-popup">
+      <p>Complex carbs found in rice, potatoes, and bread. Provide sustained energy.</p>
+    </div>
+  </div>
+  <div class="carb-card">
+    <h5>Fibers</h5>
+    <div class="carb-popup">
+      <p>Indigestible carbs that aid digestion. Found in veggies, whole grains, and legumes.</p>
+    </div>
+  </div>
+</div>
+
+    </article>
+
+    <article class="macro-slide" id="proteins">
+  <h4>Proteins</h4>
+  <p>Proteins are essential for the body's growth, repair, and overall function. <br>They are split into 3 categories, complete, incomplete and complementary proteins.<br>
+    Composed of amino acids, the building blocks the body uses to create new proteins.</p>
+  <img src="images/proteins.png" alt="Proteins Image">
+
+  <div class="carb-types">
+    <div class="carb-card">
+      <h5>Complete Proteins</h5>
+      <div class="carb-popup">
+        <p>Contain all essential amino acids. Found in meat, dairy, eggs, and soy.</p>
+      </div>
+    </div>
+    <div class="carb-card">
+      <h5>Incomplete Proteins</h5>
+      <div class="carb-popup">
+        <p>Lack one or more essential amino acids. Found in beans, nuts, and grains.</p>
+      </div>
+    </div>
+    <div class="carb-card">
+      <h5>Complementary Proteins</h5>
+      <div class="carb-popup">
+        <p>Combining incomplete proteins to make a complete one.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+    <article class="macro-slide" id="fats">
+  <h4>Fats</h4>
+  <p>Fats are involved in production of certain hormes and also provide energy, help absorb vitamins for daily activites and bodily functions.
+    <br>Fats serve as an energy storage as they are stored in the body as adipose tissue, providing a reserve of energy for later use.
+    <br>Helps to maintain body temperature by providing insulation against cold.
+  </p>
+  <img src="images/fats.png" alt="Fats Image">
+
+  <div class="carb-types">
+    <div class="carb-card">
+      <h5>Unsaturated Fats</h5>
+      <div class="carb-popup">
+        <p>Healthy fats that help reduce cholesterol. Found in olive oil, avocados, and fish.</p>
+      </div>
+    </div>
+    <div class="carb-card">
+      <h5>Saturated Fats</h5>
+      <div class="carb-popup">
+        <p>Consumption should be limited. Found in butter, cheese, and red meat.</p>
+      </div>
+    </div>
+    <div class="carb-card">
+      <h5>Trans Fats</h5>
+      <div class="carb-popup">
+        <p>Unhealthy fats linked to heart disease. Found in processed foods and snacks.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+  
+</section>
+
+
+    <!-- MICRONUTRIENTS -->
+    <section id="micronutrients" class="panel">
+  <h3>Micronutrients</h3>
+  <p>
+    Micronutrients are essential vitamins and minerals needed by the body in small amounts for optimal health, growth, and development.<br>They play crucial roles in various bodily functions, including enzyme production, hormone regulation, and cellular processes.<br>Deficiencies in micronutrients can lead to a range of health problems, some of which can be severe.
+    There are 4 types: Water-soluble vitamins, Fat-soluble vitamins, Macrominerals, and Trace minerals.
+  </p>
+  <div class="vitamin-tabs">
+    <button id="btn-water" class="tab-btn">Water-Soluble</button>
+    <button id="btn-fat" class="tab-btn">Fat-Soluble</button>
+    <button id="btn-macro" class="tab-btn">Macrominerals</button>
+    <button id="btn-trace" class="tab-btn">Trace Minerals</button>
+  </div>
+
+  <div id="vitaminCards" class="vitamin-cards"></div>
+</section>
+
+
+
+    <!-- DIETARY GUIDELINES -->
+    <section id="guidelines" class="panel">
+      <h2>Dietary Guidelines</h2>
+      <p>Follow official guidelines to maintain a healthy weight, stay active, and prevent chronic diseases.</p>
+      <img src="images/dietaryguidelines.png" alt="Dietary Guidelines" />
+    </section>
+
+    <!-- FOOD LABELS -->
+    <section id="labels" class="panel">
+      <h2>Food Labels</h2>
+      <p>Understanding food labels helps you make informed food choices and control your nutrient intake.</p>
+      <img src="images/food-label.png" alt="Food Label Example" />
+    </section>
+
+    <!-- MINI-GAME -->
+    <!-- index.html -->
+<section id="minigame" class="panel">
+  <h2>Mini-Game: Catch the Healthy Food</h2>
+  <p>Use arrow keys or buttons to catch healthy food and avoid junk!</p>
+<!-- Score & Restart -->
+  <div id="scoreBoard">
+    <p>Score: <span id="score">0</span></p>
+    <p>Time: <span id="timer">30</span>s</p>
+    <p>Lives: <span id="lives">3</span></p>
+  </div>
+  <!-- Game Canvas -->
+  <div id="game-container">
+    <canvas id="gameCanvas" width="360" height="500"></canvas>
+    <div id="mobile-controls">
+      <button id="leftBtn">⬅️</button>
+      <button id="rightBtn">➡️</button>
+    </div>
+  </div>
+
+  
+</section>
+
+
+    <!-- QUIZ -->
+<section id="quiz" class="panel">
+  <h4>Nutrition Quiz</h4>
+  <p>Take this quiz to test what you’ve learned.</p>
+  <div id="quiz-container">
+    <div id="quiz-question"></div>
+    <div id="quiz-options"></div>
+    <div id="quiz-feedback"></div>
+    <button id="quiz-next-btn" class="hidden">Next</button>
+    <div id="quiz-end-screen" class="hidden">
+      <p id="quiz-score"></p>
+      <button id="quiz-restart-btn">Try Again</button>
+    </div>
+  </div>
+  <p>Choose one 1 out of 4 choices</p>
+</section>
+
+  </main>
+
+  <button id="backToTopBtn" onclick="scrollToTop()">↑ Top</button>
 </body>
 </html>

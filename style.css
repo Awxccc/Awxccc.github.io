@@ -1,8 +1,517 @@
+@font-face {
+    font-family: "Lexend";
+    src: url("fonts/Lexend-VariableFont_wght.ttf") format("truetype");
+    font-weight: 400 900;
+    font-style: normal;
+}
 
-h1{background:cyan;}
-@media (max-width:800px){
-#qrCodeImg{display:none;} /*hide QR
-code when its mobile size */
-h1{background: lightgreen;}
-h1::after{content:"(mobile)";}
+/* ===== GENERAL STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lexend', sans-serif;
+  background-color: #F5F5F5;
+  color: #333333;
+  line-height: 1.6;
+  overflow-x: hidden;
+  overflow-y: auto;
+  
+}
+
+#macronutrients {
+    background-color: #e2ffd6;
+}
+
+#macro-video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#micronutrients {
+    background-color: #e9e7f4;
+}
+
+#guidelines {
+    background-color: #01b5f2;
+}
+
+#labels {
+    background-color: hsl(172, 100%, 80%);
+}
+
+#minigame {
+    background-color: #bbffbb;
+}
+
+#quiz {
+    background-color: #a5f4ff;
+}
+
+h1, h2 {
+    color: #ffffff;
+}
+
+h3{
+    text-align: center;
+    font-size: 32px;
+    background-color: rgba(207, 207, 207, 0.8);
+  padding: 20px 30px;
+  border-radius: 15px;
+}
+h4{
+    text-align: center;
+    font-size: 40px;
+}
+
+
+#home p{
+    color: white;
+}
+
+#macronutrients p {
+    text-align: center;
+    padding: 50px 30px;
+}
+
+#micronutrients p {
+    text-align: center;
+    padding: 50px 30px;
+}
+
+#minigame p {
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+}
+
+audio {
+    margin-top: 10px;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+header {
+    background-color: #2E7D32;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: #FFFFFF;
+}
+
+.nav {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-btn {
+    font-family: 'Lexend', sans-serif;
+    background-color: #8BC34A;
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #FFAB91;
+}
+
+/* HamBtn */
+.hamBtn {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+.panel {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.panel.active {
+    display: block;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+iframe {
+    width: 100%;
+    max-width: 600px;
+    height: 315px;
+    border: none;
+    margin-top: 10px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media screen and (max-width: 800px) {
+    .nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        
+        left: 0;
+        width: 100%;
+        background-color: #2E7D32;
+        z-index: 1000;
+    }
+
+    .nav.show {
+        position: relative;
+        display: flex;
+    }
+
+    .nav-btn {
+        width: 100%;
+        text-align: left;
+        padding: 15px;
+        border-bottom: 1px solid #4CAF50;
+    }
+
+    .hamBtn {
+        display: block;
+    }
+
+    header {
+        flex-wrap: wrap;
+    }
+
+    li{
+        padding: 0 1em;
+        font: size 0.9rem;
+    }
+}
+
+
+/* ==== Mini-Game Styles ==== */
+#game-container {
+    position: relative;
+    margin: 20px 0;
+    text-align: center;
+}
+
+canvas {
+    border: 3px solid #4CAF50;
+    background-color: #FFFFFF;
+}
+
+#mobile-controls {
+    display: none;
+    margin-top: 10px;
+}
+
+#mobile-controls button {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #7dcfff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Score Board */
+#scoreBoard {
+    margin-top: 10px;
+}
+
+#scoreBoard p {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333333;
+}
+
+/* Show controls on mobile */
+@media screen and (max-width: 800px) {
+    #mobile-controls {
+        display: block;
+    }
+}
+
+/* ==== Quiz Styles ==== */
+#quiz-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#quiz-question {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+#quiz-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px auto;
+  
+  max-width: 600px;
+}
+
+#quiz-options button {
+  flex: 0 0 calc(50% - 10px);
+  background-color: #8BC34A;
+}
+
+@media screen and (max-width: 800px) {
+  #quiz-options button {
+    flex: 0 0 100%;
+  }
+}
+
+#quiz-options button:hover {
+  background-color: #689F38;
+}
+
+#quiz-feedback {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+#quiz-next-btn, #quiz-restart-btn {
+  margin-top: 20px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border: none;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+#home {
+  position: relative;
+  width: 100vw;
+  height: 93.8vh;
+  background-image: url("images/sprite_sheet.png");
+  background-size: 400% 100%;
+  background-repeat: no-repeat;
+  animation: animateBackground 8s steps(4) infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+}
+
+#home .text-box {
+  background-color: rgba(57, 168, 100, 0.8);
+  padding: 20px 30px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 90%;
+}
+
+@keyframes animateBackground {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: +133.3% 0%;
+  }
+}
+
+#backToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #444;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  display: none;
+}
+
+ul {
+    margin: 0 auto;
+  padding: 0;
+  text-align: left;
+  max-width: 300px;
+}
+
+.macro-slider {
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.macro-slide {
+  display: none;
+  transition: opacity 0.5s ease;
+}
+
+.macro-slide.active {
+  display: block;
+}
+
+.slider-controls {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.slider-controls button {
+  padding: 0.5em 1em;
+  margin: 0 0.5em;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.macro-slide img{
+  display:block;
+  width: 300px;
+  height: auto;
+  margin: 10px auto;
+}
+
+.micro-slide img{
+  display:block;
+  width: 300px;
+  height: auto;
+  margin: 10px auto;
+}
+
+.carb-types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 100px;
+  position: relative;
+}
+
+.carb-card {
+  position: relative;
+  width: 180px;
+  height: 130px;
+  border-radius: 1rem;
+  background: #4ebeff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.carb-card h5 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+  z-index: 2;
+}
+
+.carb-popup {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translate(-50%, -110%);
+  width: 220px;
+  padding: 1rem;
+  background: #fffbe6;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+.carb-card:hover .carb-popup {
+  opacity: 1;
+  transform: translate(-50%, -130%);
+  pointer-events: auto;
+}
+
+
+.vitamin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.vitamin-tabs .tab-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #e1f5fe;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.vitamin-tabs .tab-btn:hover {
+  background-color: #b3e5fc;
+}
+
+.vitamin-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.vitamin-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  width: 240px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  margin-bottom: 100px;
+}
+.vitamin-card:hover {
+  transform: scale(1.05);
+}
+
+.vitamin-card h4 {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  color: #00796b;
+}
+
+.vitamin-info p {
+  font-size: 0.95rem;
+  color: #333;
 }
