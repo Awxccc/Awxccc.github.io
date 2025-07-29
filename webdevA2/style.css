@@ -319,8 +319,8 @@ canvas {
 #home {
   position: relative;
   width: 100vw;
-  height: 93.8vh;
-  background-image: url("images/sprite_sheet.png");
+  height: 94vh;
+  background-image: url("images/sprite_sheet.jpg");
   background-size: 400% 100%;
   background-repeat: no-repeat;
   animation: animateBackground 8s steps(4) infinite;
@@ -331,6 +331,16 @@ canvas {
   overflow: hidden;
   padding: 20px;
 }
+
+@media screen and (max-width: 1854px){
+#home {
+  background-size: cover;
+  background-position: 0 0;
+}
+}
+
+
+
 
 #home .text-box {
   background-color: rgba(57, 168, 100, 0.8);
@@ -345,9 +355,10 @@ canvas {
     background-position: 0% 0%;
   }
   to {
-    background-position: +133.3% 0%;
+    background-position: 133.3% 0%;
   }
 }
+
 
 #backToTopBtn {
   position: fixed;
