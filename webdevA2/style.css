@@ -92,6 +92,14 @@ h5{
     text-align: center;
 }
 
+#minigame h2 {
+  margin-top: 5%;
+}
+
+#gameCanvas{
+  margin-bottom: 25%;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -110,8 +118,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
+    position: fixed; /* fixed instead of relative */
+    top: 0; /* stick to top of page */
+    left: 0;
+    width: 100%; /* full width */
+    z-index: 1000; /* stay above other content */
 }
+
 
 header h1 {
     font-size: 1.5rem;
@@ -318,6 +331,14 @@ canvas {
 #quiz-container {
   margin-top: 20px;
   text-align: center;
+}
+
+#quiz h4{
+  margin-top: 10%;
+}
+
+#quiz article{
+  margin-bottom: 10%;
 }
 
 #quiz-question {

@@ -25,30 +25,36 @@ function drawStartScreen() {
 
 // ==== Page Navigation ====
 navButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const targetId = button.id.replace('-btn', '');
+  button.addEventListener("click", () => {
+    const targetId = button.id.replace("-btn", "");
+    const targetPanel = document.getElementById(targetId);
 
-    // If we are leaving the mini‑game page
+    // If leaving mini-game
     if (document.getElementById("minigame").classList.contains("active") && targetId !== "minigame") {
       stopGame();
     }
 
-    // Hide all panels
-    panels.forEach(panel => panel.classList.remove('active'));
-
-    // Show the new panel
-    const targetPanel = document.getElementById(targetId);
+    // Hide all panels & show target panel
+    panels.forEach(panel => panel.classList.remove("active"));
     if (targetPanel) {
-      targetPanel.classList.add('active');
+      targetPanel.classList.add("active");
     }
 
-    // If we are going to the mini‑game page, reset & show start screen
+    // If entering mini-game
     if (targetId === "minigame") {
-      stopGame(); // ensure everything stopped
-      drawStartScreen(); // show "Click to Play!" message
+      stopGame();
+      drawStartScreen();
     }
-    if (targetId === "quiz") {
+if (targetId === "quiz") {
       restartQuiz();
+    }
+    // ===== Smooth Scroll to section =====
+    if (targetPanel) {
+      const headerHeight = document.querySelector("header")?.offsetHeight || 0;
+      window.scrollTo({
+        top: targetPanel.offsetTop - headerHeight,
+        behavior: "smooth"
+      });
     }
   });
 });
@@ -532,9 +538,44 @@ const quizData = [
     answer: 1,
   },
   {
+    question: "Unsaturated fats are considered:",
+    options: ["Healthy fats", "Unhealthy fats", "Empty calories", "Sugary fats"],
+    answer: 0
+  },
+  {
+    question: "According to the dietary guidelines, how much of your plate should be fruits?",
+    options: ["Half", "Quarter", "Three-quarters", "None"],
+    answer: 1
+  },
+  {
+    question: "Wholegrains are a good source of:",
+    options: ["Protein", "Carbohydrates", "Vitamin C", "Fats"],
+    answer: 1
+  },
+  {
+    question: "How many cups of water per day is generally recommended for men?",
+    options: ["5 cups", "8 cups", "15.5 cups", "25 cups"],
+    answer: 2
+  },
+  {
+    question: "Which vitamin helps your body absorb calcium?",
+    options: ["Vitamin K", "Vitamin C", "Vitamin D", "Vitamin A"],
+    answer: 2
+  },
+  {
+    question: "Which mineral helps carry oxygen in the blood?",
+    options: ["Iron", "Zinc", "Calcium", "Magnesium"],
+    answer: 0
+  },
+  {
     question: "Vitamin C is found in which food?",
     options: ["Oranges", "Bread", "Cheese", "Rice"],
     answer: 0,
+  },
+  {
+    question: "Vitamin A is important for:",
+    options: ["Energy production", "Vision", "Bone strength", "Digestive health"],
+    answer: 1
   }
 ];
 
