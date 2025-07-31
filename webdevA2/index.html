@@ -12,6 +12,7 @@
   <!-- Header -->
   <header>
     <h1 id="home-nav" class="home-btn">Nutrition</h1>
+    <button id="btnFS">FullScreen</button>
     <button id="hamBtn" class="hamBtn">☰</button>
     <nav id="main-nav" class="nav">
       <button class="nav-btn" id="macronutrients-btn">Macronutrients</button>
@@ -19,6 +20,7 @@
       <button class="nav-btn" id="guidelines-btn">Guidelines</button>
       <button class="nav-btn" id="minigame-btn">Mini-Game</button>
       <button class="nav-btn" id="quiz-btn">Quiz</button>
+      
     </nav>
   </header>
 
@@ -28,8 +30,16 @@
     <section id="home" class="panel active">
   <div class="text-box">
     <h2>Welcome to Nutrition Explorer!</h2>
-    <p>Learn about healthy eating, nutrients, and food choices.</p>
+    <p>Learn about healthy eating, nutrients, and food choices.
+      <div>
+      <h2 id="qrcontent">Scan the code below to go to mobile page!</h2></div>
+    </p>
   </div>
+  <footer>
+    
+
+<img id="qrCodeImg" src="images/qrcode_awxccc.github.io.png">
+</footer>
 </section>
 
 
@@ -37,7 +47,7 @@
 <section id="macronutrients" class="panel">
   <h3>Macronutrients</h3>
   <div id="macro-video">
-    <iframe
+    <iframe width="560" height="315"
       src="https://www.youtube.com/embed/smPR215SRzM?si=t8QKTlfnyYgA2cNu"
       title="YouTube video player"
       frameborder="0"
