@@ -5,7 +5,7 @@
 "background_color": "#ffffff",
 "theme_color": "#00FF00",
 "icons": [
-{ "src": "images/apple.png",
+{ "src": "images/appleIcon.png",
 "sizes": "64x64",
 "type": "image/png"
 }
