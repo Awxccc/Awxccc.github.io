@@ -12,6 +12,10 @@
     box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Lexend', sans-serif;
   background-color: #F5F5F5;
@@ -36,13 +40,6 @@ body {
     background-color: #e9e7f4;
 }
 
-#guidelines {
-    background-color: #01b5f2;
-}
-
-#labels {
-    background-color: hsl(172, 100%, 80%);
-}
 
 #minigame {
     background-color: #bbffbb;
@@ -68,6 +65,9 @@ h4{
     font-size: 40px;
 }
 
+h5{
+    text-align: center;
+}
 
 #home p{
     color: white;
@@ -150,7 +150,9 @@ header h1 {
 }
 
 .panel.active {
-    display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Animation */
@@ -166,11 +168,7 @@ header h1 {
 }
 
 iframe {
-    width: 100%;
-    max-width: 600px;
-    height: 315px;
-    border: none;
-    margin-top: 10px;
+    max-width: 100%;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -209,6 +207,48 @@ iframe {
     li{
         padding: 0 1em;
         font: size 0.9rem;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .nav {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    /* 3-column layout for cards */
+    .vitamin-cards,
+    .carb-types {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        justify-items: center;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .vitamin-cards,
+    .carb-types {
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+        gap: 2rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    /* Force vertical nav menu */
+    .nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* Force single column cards */
+    .vitamin-cards,
+    .carb-types {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }
 
@@ -488,7 +528,7 @@ ul {
   padding: 10px 16px;
   border: none;
   border-radius: 20px;
-  background-color: #e1f5fe;
+  background-color: #5fccff;
   cursor: pointer;
   transition: background 0.3s;
 }
@@ -525,4 +565,105 @@ ul {
 .vitamin-info p {
   font-size: 0.95rem;
   color: #333;
+}
+
+
+.image-map {
+  position: relative;
+  display: inline-block;
+}
+
+.image-map img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+}
+
+/* Fruits */
+#FruitsMap {
+  width: 27%;
+  height: 31.8%;
+  border-radius: 100% 0 0 0;
+  left: 20%;
+  top: 14%;
+}
+
+/* Grains */
+#GrainsMap {
+  width: 27%;
+  height: 38%;
+  border-radius: 0 100% 0 0;
+  left: 48.5%;
+  top: 14%;
+}
+
+/* Vegetables */
+#VegetablesMap {
+  width: 28%;
+  height: 39%;
+  border-radius: 0 0 0 100%;
+  left: 19%;
+  top: 47.2%;
+}
+
+/* Proteins */
+#ProteinsMap {
+  width: 27%;
+  height: 31.8%;
+  border-radius: 0 0 100% 0;
+  left: 48.2%;
+  top: 54%;
+}
+
+/* Water */
+#WaterMap {
+  width: 20.8%;
+  height: 26.6%;
+  border-radius: 50%;
+  left: 75.5%;
+  top: 12.7%;
+}
+
+.tooltip-card {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  width: 80%;
+  max-width: 500px;
+  max-height: 80%;
+  overflow-y: auto;
+  z-index: 9999;
+}
+
+.tooltip-card.active {
+  display: block;
+}
+
+.tooltip-close {
+  display: block;
+  text-align: right;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+#guidelines {
+    background-color: #01b5f2;
+}
+
+#guidelines p {
+    text-align: center;
+    padding: 50px 30px;
 }

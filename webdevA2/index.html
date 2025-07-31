@@ -17,7 +17,6 @@
       <button class="nav-btn" id="macronutrients-btn">Macronutrients</button>
       <button class="nav-btn" id="micronutrients-btn">Micronutrients</button>
       <button class="nav-btn" id="guidelines-btn">Guidelines</button>
-      <button class="nav-btn" id="labels-btn">Food Labels</button>
       <button class="nav-btn" id="minigame-btn">Mini-Game</button>
       <button class="nav-btn" id="quiz-btn">Quiz</button>
     </nav>
@@ -35,122 +34,45 @@
 
 
     <!-- MACRONUTRIENTS -->
-    <section id="macronutrients" class="panel">
+<section id="macronutrients" class="panel">
   <h3>Macronutrients</h3>
   <div id="macro-video">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/smPR215SRzM?si=t8QKTlfnyYgA2cNu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  
-</div>
+    <iframe
+      src="https://www.youtube.com/embed/smPR215SRzM?si=t8QKTlfnyYgA2cNu"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
+  </div>
 
   <div class="slider-controls">
     <button id="prevMacro"><</button>
     <button id="nextMacro">></button>
   </div>
-  <div class="macro-slider">
-    <article class="macro-slide active" id="carbs">
-      <h4>Carbohydrates</h4>
-      <p>Carbohydrates are the main energy source for your body and are found in various foods like fruits, vegetables, grains, and dairy products.<br>Carbohydrates are classified into sugars, starches, and fiber, each playing a unique role in providing energy and supporting bodily functions. </p>
-      <img src="images/carbohydrates.jpg" alt="Carbohydrates Image">
-      
-    <div class="carb-types">
-  <div class="carb-card">
-    <h5>Sugars</h5>
-    <div class="carb-popup">
-      <p>Simple carbs that are quickly digested. Found in fruits, sweets, and soft drinks.</p>
-    </div>
-  </div>
-  <div class="carb-card">
-    <h5>Starches</h5>
-    <div class="carb-popup">
-      <p>Complex carbs found in rice, potatoes, and bread. Provide sustained energy.</p>
-    </div>
-  </div>
-  <div class="carb-card">
-    <h5>Fibers</h5>
-    <div class="carb-popup">
-      <p>Indigestible carbs that aid digestion. Found in veggies, whole grains, and legumes.</p>
-    </div>
-  </div>
-</div>
 
-    </article>
-
-    <article class="macro-slide" id="proteins">
-  <h4>Proteins</h4>
-  <p>Proteins are essential for the body's growth, repair, and overall function. <br>They are split into 3 categories, complete, incomplete and complementary proteins.<br>
-    Composed of amino acids, the building blocks the body uses to create new proteins.</p>
-  <img src="images/proteins.jpg" alt="Proteins Image">
-
-  <div class="carb-types">
-    <div class="carb-card">
-      <h5>Complete Proteins</h5>
-      <div class="carb-popup">
-        <p>Contain all essential amino acids. Found in meat, dairy, eggs, and soy.</p>
-      </div>
-    </div>
-    <div class="carb-card">
-      <h5>Incomplete Proteins</h5>
-      <div class="carb-popup">
-        <p>Lack one or more essential amino acids. Found in beans, nuts, and grains.</p>
-      </div>
-    </div>
-    <div class="carb-card">
-      <h5>Complementary Proteins</h5>
-      <div class="carb-popup">
-        <p>Combining incomplete proteins to make a complete one.</p>
-      </div>
-    </div>
-  </div>
-</article>
-
-
-    <article class="macro-slide" id="fats">
-  <h4>Fats</h4>
-  <p>Fats are involved in production of certain hormes and also provide energy, help absorb vitamins for daily activites and bodily functions.
-    <br>Fats serve as an energy storage as they are stored in the body as adipose tissue, providing a reserve of energy for later use.
-    <br>Helps to maintain body temperature by providing insulation against cold.
-  </p>
-  <img src="images/fats.jpg" alt="Fats Image">
-
-  <div class="carb-types">
-    <div class="carb-card">
-      <h5>Unsaturated Fats</h5>
-      <div class="carb-popup">
-        <p>Healthy fats that help reduce cholesterol. Found in olive oil, avocados, and fish.</p>
-      </div>
-    </div>
-    <div class="carb-card">
-      <h5>Saturated Fats</h5>
-      <div class="carb-popup">
-        <p>Consumption should be limited. Found in butter, cheese, and red meat.</p>
-      </div>
-    </div>
-    <div class="carb-card">
-      <h5>Trans Fats</h5>
-      <div class="carb-popup">
-        <p>Unhealthy fats linked to heart disease. Found in processed foods and snacks.</p>
-      </div>
-    </div>
-  </div>
-</article>
-
-
-  
+  <div class="macro-slider" id="macroSlider"></div>
 </section>
+
 
 
     <!-- MICRONUTRIENTS -->
     <section id="micronutrients" class="panel">
   <h3>Micronutrients</h3>
+  <div id="macro-video">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/fX_wJflOoAA?si=CTHiI7SnW40L-5Lq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
   <p>
     Micronutrients are essential vitamins and minerals needed by the body in small amounts for optimal health, growth, and development.<br>They play crucial roles in various bodily functions, including enzyme production, hormone regulation, and cellular processes.<br>Deficiencies in micronutrients can lead to a range of health problems, some of which can be severe.
-    There are 4 types: Water-soluble vitamins, Fat-soluble vitamins, Macrominerals, and Trace minerals.
+    <br>There are 4 types: Water-soluble vitamins, Fat-soluble vitamins, Macrominerals, and Trace minerals.
   </p>
   <div class="vitamin-tabs">
-    <button id="btn-water" class="tab-btn">Water-Soluble</button>
-    <button id="btn-fat" class="tab-btn">Fat-Soluble</button>
-    <button id="btn-macro" class="tab-btn">Macrominerals</button>
-    <button id="btn-trace" class="tab-btn">Trace Minerals</button>
+    <button class="tab-btn" data-type="water">Water-Soluble</button>
+<button class="tab-btn" data-type="fat">Fat-Soluble</button>
+<button class="tab-btn" data-type="macro">Macrominerals</button>
+<button class="tab-btn" data-type="trace">Trace Minerals</button>
+
   </div>
 
   <div id="vitaminCards" class="vitamin-cards"></div>
@@ -160,16 +82,24 @@
 
     <!-- DIETARY GUIDELINES -->
     <section id="guidelines" class="panel">
-      <h2>Dietary Guidelines</h2>
-      <p>Follow official guidelines to maintain a healthy weight, stay active, and prevent chronic diseases.</p>
-      <img src="images/dietaryguidelines.jpg" alt="Dietary Guidelines" />
-    </section>
+      <h3>Dietary Guidelines</h3>
+      <p>Follow official guidelines to maintain a healthy weight, stay active, and prevent chronic diseases.
+        <br>Here is a healthy eating plate to act as an easy-to-understand visual guide.
+        <br>Click on each section below to see how you should eat to meet your daily nutritional needs.
+        <br><a href="https://www.healthhub.sg/programmes/nutrition-hub/eat-more" target="_blank" rel="noopener noreferrer">Click this link to find out more!</a>
+      </p>
+      <div class="image-map">
+  <img src="images/dietaryguidelines.jpg" alt="Dietary Guidelines" />
+  <!-- Hotspots only -->
+  <div id="FruitsMap" class="hotspot"></div>
+  <div id="GrainsMap" class="hotspot"></div>
+  <div id="VegetablesMap" class="hotspot"></div>
+  <div id="ProteinsMap" class="hotspot"></div>
+  <div id="WaterMap" class="hotspot"></div>
+</div>
 
-    <!-- FOOD LABELS -->
-    <section id="labels" class="panel">
-      <h2>Food Labels</h2>
-      <p>Understanding food labels helps you make informed food choices and control your nutrient intake.</p>
-      <img src="images/food-label.jpg" alt="Food Label Example" />
+
+      
     </section>
 
     <!-- MINI-GAME -->
@@ -201,8 +131,11 @@
   <h4>Nutrition Quiz</h4>
   <p>Take this quiz to test what you’ve learned.</p>
   <div id="quiz-container">
+    <fieldset>
     <div id="quiz-question"></div>
     <div id="quiz-options"></div>
+    </fieldset>
+    <button id="quiz-submit-btn">Submit Answers</button>
     <div id="quiz-feedback"></div>
     <button id="quiz-next-btn" class="hidden">Next</button>
     <div id="quiz-end-screen" class="hidden">
@@ -210,7 +143,7 @@
       <button id="quiz-restart-btn">Try Again</button>
     </div>
   </div>
-  <p>Choose one 1 out of 4 choices</p>
+  <article>Choose one 1 out of 4 choices</article>
 </section>
 
   </main>

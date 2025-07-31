@@ -1,37 +1,271 @@
 // ===== Select DOM Elements =====
 const navButtons = document.querySelectorAll('.nav-btn');
-const homeButton = document.querySelectorAll('.home-btn');
 const panels = document.querySelectorAll('.panel');
 const hamBtn = document.getElementById('hamBtn');
 const navMenu = document.getElementById('main-nav');
 
-// ===== Page Navigation (Content Swapping) =====
+
+function stopGame() {
+  cancelAnimationFrame(gameInterval);
+  clearInterval(timerInterval);
+  timerInterval = null;
+  gameStarted = false;
+  gameOver = false;
+}
+
+function drawStartScreen() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#696969ff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#00ff55ff";
+  ctx.font = "32px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("Click to Play!", canvas.width / 2, canvas.height / 2);
+}
+
+// ==== Page Navigation ====
 navButtons.forEach(button => {
   button.addEventListener('click', () => {
     const targetId = button.id.replace('-btn', '');
 
-    panels.forEach(panel => {
-      panel.classList.remove('active');
-    });
+    // If we are leaving the mini‑game page
+    if (document.getElementById("minigame").classList.contains("active") && targetId !== "minigame") {
+      stopGame();
+    }
 
+    // Hide all panels
+    panels.forEach(panel => panel.classList.remove('active'));
+
+    // Show the new panel
     const targetPanel = document.getElementById(targetId);
     if (targetPanel) {
       targetPanel.classList.add('active');
     }
 
+    // If we are going to the mini‑game page, reset & show start screen
+    if (targetId === "minigame") {
+      stopGame(); // ensure everything stopped
+      drawStartScreen(); // show "Click to Play!" message
+    }
     if (targetId === "quiz") {
       restartQuiz();
     }
-
-    navMenu.classList.remove('show');
   });
 });
+
 
 
 // ===== HamBtn Menu Toggle (Mobile) =====
 hamBtn.addEventListener('click', () => {
   navMenu.classList.toggle('show');
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ================================
+     1. Macronutrients
+  ==================================*/
+  const macronutrientData = [
+    {
+      id: "carbs",
+      title: "Carbohydrates",
+      text: `Carbohydrates are the main energy source for your body and are found in various foods like fruits, vegetables, grains, and dairy products.<br>
+             Carbohydrates are classified into sugars, starches, and fiber, each playing a unique role in providing energy and supporting bodily functions.`,
+      image: "images/carbohydrates.jpg",
+      subcategories: [
+        { name: "Sugars", description: "Simple carbs that are quickly digested. Found in fruits, sweets, and soft drinks." },
+        { name: "Starches", description: "Complex carbs found in rice, potatoes, and bread. Provide sustained energy." },
+        { name: "Fibers", description: "Indigestible carbs that aid digestion. Found in veggies, whole grains, and legumes." }
+      ]
+    },
+    {
+      id: "proteins",
+      title: "Proteins",
+      text: `Proteins are essential for the body's growth, repair, and overall function.<br>
+             They are split into 3 categories: complete, incomplete and complementary proteins.<br>
+             Composed of amino acids, the building blocks the body uses to create new proteins.`,
+      image: "images/proteins.jpg",
+      subcategories: [
+        { name: "Complete Proteins", description: "Contain all essential amino acids. Found in meat, dairy, eggs, and soy." },
+        { name: "Incomplete Proteins", description: "Lack one or more essential amino acids. Found in beans, nuts, and grains." },
+        { name: "Complementary Proteins", description: "Combining incomplete proteins to make a complete one." }
+      ]
+    },
+    {
+      id: "fats",
+      title: "Fats",
+      text: `Fats are involved in production of certain hormones and also provide energy, help absorb vitamins for daily activities and bodily functions.<br>
+             Fats serve as an energy storage as they are stored in the body as adipose tissue, providing a reserve of energy for later use.<br>
+             Helps to maintain body temperature by providing insulation against cold.`,
+      image: "images/fats.jpg",
+      subcategories: [
+        { name: "Unsaturated Fats", description: "Healthy fats that help reduce cholesterol. Found in olive oil, avocados, and fish." },
+        { name: "Saturated Fats", description: "Consumption should be limited. Found in butter, cheese, and red meat." },
+        { name: "Trans Fats", description: "Unhealthy fats linked to heart disease. Found in processed foods and snacks." }
+      ]
+    }
+  ];
+
+  function renderMacronutrients() {
+    const container = document.getElementById("macroSlider");
+    if (!container) return;
+    container.innerHTML = "";
+    macronutrientData.forEach((macro, index) => {
+      const slide = document.createElement("article");
+      slide.className = `macro-slide ${index === 0 ? "active" : ""}`;
+      slide.id = macro.id;
+      slide.innerHTML = `
+        <h4>${macro.title}</h4>
+        <p>${macro.text}</p>
+        <img src="${macro.image}" alt="${macro.title} Image">
+        <div class="carb-types">
+          ${macro.subcategories.map(sub => `
+            <div class="carb-card">
+              <h5>${sub.name}</h5>
+              <div class="carb-popup"><p>${sub.description}</p></div>
+            </div>`).join("")}
+        </div>
+      `;
+      container.appendChild(slide);
+    });
+  }
+
+  /* ================================
+     2. Dietary Guidelines
+  ==================================*/
+  const dietaryGuidelinesData = {
+    FruitsMap: {
+      title: "Fruits",
+      text: "A quarter plate of fruits is about one-third of your daily vitamin needs. Having this at each meal will meet the daily recommended intake.",
+      examples: "A pear, 3 apricots, 2 handfuls of frozen blueberries."
+    },
+    GrainsMap: {
+      title: "Grains",
+      text: "A quarter plate of wholegrains provides about 2 servings of carbohydrates. Having this at each meal meets the recommended 5–7 servings per day.",
+      examples: "2 slices of wholemeal bread, 4 wholemeal crackers, 1/2 bowl of brown rice."
+    },
+    VegetablesMap: {
+      title: "Vegetables",
+      text: "A quarter plate of vegetables provides essential vitamins and fiber. This portion at each meal helps meet daily vitamin needs.",
+      examples: "1/2 cup cooked vegetables, 1 cup salad, 1/2 cup sweetcorn."
+    },
+    ProteinsMap: {
+      title: "Protein",
+      text: "A quarter plate of protein foods helps meet daily protein needs for growth and repair.",
+      examples: "1 palm-sized meat portion, 3 eggs, 2 small tofu blocks."
+    },
+    WaterMap: {
+      title: "Water",
+      text: "Aim for about 11.5 cups for women and 15.5 cups for men daily. Adjust based on activity level and climate.",
+      examples: "Water (priority), herbal tea, coconut water, smoothies."
+    }
+  };
+
+  function renderDietaryGuidelines() {
+    document.querySelectorAll('.hotspot').forEach(hotspot => {
+      const id = hotspot.id;
+      const data = dietaryGuidelinesData[id];
+      if (!data) return;
+      const card = document.createElement('div');
+      card.className = 'tooltip-card';
+      card.innerHTML = `
+        <span class="tooltip-close">✖</span>
+        <h4>${data.title}</h4>
+        <p>${data.text}</p>
+        <h5>Examples of foods: ${data.examples}</h5>
+      `;
+      hotspot.appendChild(card);
+      hotspot.addEventListener('click', () => {
+        document.querySelectorAll('.tooltip-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+      });
+      card.querySelector('.tooltip-close').addEventListener('click', e => {
+        e.stopPropagation();
+        card.classList.remove('active');
+      });
+    });
+  }
+
+  /* ================================
+     3. Vitamins
+  ==================================*/
+  const vitaminData = {
+    water: [
+      { title: "Vitamin C", info: "Acts as an antioxidant, boosts immunity, protects cells from damage, and is crucial for collagen synthesis, wound healing, and iron absorption.", foods: "Foods: Citrus fruits, Bell peppers, Strawberries, Broccoli" },
+      { title: "Vitamin B", info: "A group of vitamins with diverse functions, including energy production, nervous system support, and red blood cell formation.", foods: "Foods: Whole grains, Meat, Eggs, Leafy greens" }
+    ],
+    fat: [
+      { title: "Vitamin A", info: "Important for vision, cell growth and immune function.", foods: "Foods: Carrots, Sweet potatoes, Spinach, Liver" },
+      { title: "Vitamin D", info: "Helps absorb calcium and phosphorus, crucial for bone health and immune function.", foods: "Foods: Fatty fish, fortified milk, egg yolks, sunlight exposure" },
+      { title: "Vitamin E", info: "Acts as an antioxidant, protecting cells from damage, and supports immune function.", foods: "Foods: Nuts, seeds, vegetable oils, leafy greens, fortified cereals" },
+      { title: "Vitamin K", info: "Essential for blood clotting and bone health.", foods: "Foods: Leafy greens, broccoli, Brussels sprouts" }
+    ],
+    macro: [
+      { title: "Calcium", info: "Builds strong bones and teeth, essential for muscle function and nerve signaling.", foods: "Foods: Dairy, leafy greens, fortified plant milks" },
+      { title: "Phosphorus", info: "Works with calcium to build strong bones and teeth, and helps with energy metabolism.", foods: "Foods: Meat, fish, poultry, dairy, nuts, legumes" },
+      { title: "Magnesium", info: "Helps with muscle and nerve function, blood sugar control, and blood pressure regulation.", foods: "Foods: Leafy greens, nuts, seeds, whole grains, legumes" },
+      { title: "Sodium", info: "Maintains fluid balance, essential for nerve impulses and muscle contractions.", foods: "Foods: Table salt, processed foods, cured meats" }
+    ],
+    trace: [
+      { title: "Iron", info: "Carries oxygen in the blood, essential for energy production and growth.", foods: "Foods: Red meat, poultry, fish, beans, lentils, spinach" },
+      { title: "Zinc", info: "Supports immune system, wound healing, and cell growth.", foods: "Foods: Oysters, red meat, poultry, beans, nuts, whole grains" },
+      { title: "Copper", info: "Helps in iron metabolism, red blood cell formation, and energy production.", foods: "Foods: Shellfish, nuts, seeds, whole grains, dark chocolate" },
+      { title: "Iodine", info: "Essential for thyroid hormone production, which regulates metabolism.", foods: "Foods: Iodized salt, seafood, dairy products" },
+      { title: "Selenium", info: "Acts as an antioxidant, supports thyroid function and immune health.", foods: "Foods: Brazil nuts, seafood, poultry, eggs, whole grains" },
+      { title: "Manganese", info: "Involved in bone formation, metabolism, and antioxidant defense.", foods: "Foods: Whole grains, nuts, leafy vegetables, tea" }
+    ]
+  };
+
+  function renderVitamins(type) {
+    const container = document.getElementById("vitaminCards");
+    if (!container) return;
+    container.innerHTML = "";
+    vitaminData[type].forEach(vit => {
+      const card = document.createElement("div");
+      card.className = "vitamin-card";
+      card.innerHTML = `
+        <h4>${vit.title}</h4>
+        <div class="vitamin-info">
+          <p>${vit.info}</p>
+          <h5>${vit.foods}</h5>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => renderVitamins(btn.dataset.type));
+  });
+
+  /* ================================
+     4. Init & Slider
+  ==================================*/
+  renderMacronutrients();
+  renderDietaryGuidelines();
+  renderVitamins("water"); // default
+
+  let currentSlide = 0;
+  function showSlide(index) {
+    document.querySelectorAll('.macro-slide').forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+  }
+  document.getElementById('nextMacro').addEventListener('click', () => {
+    const slides = document.querySelectorAll('.macro-slide');
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  });
+  document.getElementById('prevMacro').addEventListener('click', () => {
+    const slides = document.querySelectorAll('.macro-slide');
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+  });
+
+});
+
+
 
 
 // ==== Mini-Game Variables ====
@@ -162,6 +396,7 @@ function startGame() {
     }
   }, 1000);
 }
+
 if (!gameStarted){
     // Draw start screen
     ctx.fillStyle = "#696969ff";
@@ -190,6 +425,12 @@ function endGame() {
   alert("Your score: " + score);
 }
 
+function stopGame() {
+  cancelAnimationFrame(gameInterval);
+  clearInterval(timerInterval);
+  timerInterval = null;
+  gameStarted = false;
+}
 
 // ==== Game Loop ====
 function updateGame(deltaTime) {
@@ -317,17 +558,35 @@ function showQuestion() {
   feedbackEl.textContent = "";
   nextBtn.classList.add("hidden");
 
+  // Show submit button
+  document.getElementById("quiz-submit-btn").classList.remove("hidden");
+
   data.options.forEach((opt, index) => {
-    const btn = document.createElement("button");
-    btn.textContent = opt;
-    btn.classList.add("quiz-option");
-    btn.addEventListener("click", () => checkAnswer(index));
-    optionsEl.appendChild(btn);
+    const label = document.createElement("label");
+    label.style.display = "block";
+
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "quiz-option";
+    radio.value = index;
+
+    label.appendChild(radio);
+    label.appendChild(document.createTextNode(" " + opt));
+    optionsEl.appendChild(label);
   });
 }
 
-function checkAnswer(selectedIndex) {
+function checkAnswer() {
+  const selected = document.querySelector('input[name="quiz-option"]:checked');
+  if (!selected) {
+    feedbackEl.textContent = "❗ Please select an answer.";
+    feedbackEl.style.color = "orange";
+    return;
+  }
+
+  const selectedIndex = parseInt(selected.value);
   const correct = quizData[currentQuestion].answer;
+
   if (selectedIndex === correct) {
     quizScore++;
     correctChoice.play();
@@ -338,12 +597,16 @@ function checkAnswer(selectedIndex) {
     feedbackEl.textContent = "❌ Incorrect.";
     feedbackEl.style.color = "red";
   }
-  // Disable all buttons
-  Array.from(optionsEl.children).forEach(btn => btn.disabled = true);
 
+  // Disable all radios
+  document.querySelectorAll('input[name="quiz-option"]').forEach(r => r.disabled = true);
+
+  // Hide submit, show next
+  document.getElementById("quiz-submit-btn").classList.add("hidden");
   nextBtn.classList.remove("hidden");
   window.scrollTo(0, document.body.scrollHeight);
 }
+
 
 function nextQuestion() {
   currentQuestion++;
@@ -355,7 +618,7 @@ function nextQuestion() {
 }
 
 function endQuiz() {
-  questionEl.textContent = "";
+  questionEl.textContent = "Quiz finished!";
   optionsEl.innerHTML = "";
   feedbackEl.textContent = "";
   nextBtn.classList.add("hidden");
@@ -373,6 +636,8 @@ function restartQuiz() {
 // Button actions
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
+document.getElementById("quiz-submit-btn").addEventListener("click", checkAnswer);
+
 
 function scrollToTop() {
   window.scrollTo(0, 0);
@@ -386,67 +651,3 @@ window.addEventListener("scroll", () => {
   btn.style.display = nearBottom ? "block" : "none";
 });
 
-const slides = document.querySelectorAll('.macro-slide');
-  let currentSlide = 0;
-
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
-    });
-  }
-
-  document.getElementById('nextMacro').addEventListener('click', () => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  });
-
-  document.getElementById('prevMacro').addEventListener('click', () => {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
-  });
-
-
-
-  const vitaminCards = document.getElementById("vitaminCards");
-  const vitaminTabs = document.querySelectorAll(".tab-btn");
-
-  const vitaminContent = {
-    water: [
-      { title: "Vitamin C", info: "Boosts immunity and acts as antioxidant." },
-      { title: "Vitamin B", info: "A group of vitamins with diverse functions, including energy production, nervous system support, and red blood cell formation. " },
-    ],
-    fat: [
-      { title: "Vitamin A", info: "Important for vision and immune function." },
-      { title: "Vitamin D", info: "Helps absorb calcium and strengthens bones." },
-    ],
-    macro: [
-      { title: "Calcium", info: "Builds strong bones and teeth." },
-      { title: "Magnesium", info: "Helps with muscle and nerve function." },
-    ],
-    trace: [
-      { title: "Iron", info: "Carries oxygen in the blood." },
-      { title: "Zinc", info: "Supports immune system and wound healing." },
-    ],
-  };
-
-  function updateVitaminCards(type) {
-    vitaminCards.innerHTML = ""; // Clear previous cards
-    vitaminContent[type].forEach((item) => {
-      const card = document.createElement("div");
-      card.className = "vitamin-card";
-      card.innerHTML = `
-        <h4>${item.title}</h4>
-        <div class="vitamin-info">
-          <p>${item.info}</p>
-        </div>
-      `;
-      vitaminCards.appendChild(card);
-    });
-  }
-
-  document.getElementById("btn-water").onclick = () => updateVitaminCards("water");
-  document.getElementById("btn-fat").onclick = () => updateVitaminCards("fat");
-  document.getElementById("btn-macro").onclick = () => updateVitaminCards("macro");
-  document.getElementById("btn-trace").onclick = () => updateVitaminCards("trace");
-
-  updateVitaminCards("water"); // Show default on load
