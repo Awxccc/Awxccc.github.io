@@ -5,13 +5,15 @@
     font-style: normal;
 }
 
-/* ===== GENERAL STYLES ===== */
+/*Universal selector to remove default margin and padding,
+border-box helps to keep all the extra stuff within set width and height*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/*default styles for overall elements*/
 html {
   overflow-x: hidden;
 }
@@ -26,37 +28,8 @@ body {
   
 }
 
-#macronutrients {
-    background-color: #e2ffd6;
-}
-
-#macro-video {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#micronutrients {
-    background-color: #e9e7f4;
-}
-
-
-#minigame {
-    background-color: #bbffbb;
-}
-
-#quiz {
-    background-color: #a5f4ff;
-}
-
 h1, h2 {
     color: #ffffff;
-}
-
-#home h3{
-    text-align: center;
-    font-size: 32px;
-  border-radius: 15px;
 }
 
 h3{
@@ -74,30 +47,8 @@ h5{
     text-align: center;
 }
 
-#home p{
-    color: white;
-}
-
 p{
   font-size: large;
-}
-
-#macronutrients p {
-    text-align: center;
-    padding: 50px 30px;
-}
-
-#micronutrients p {
-    text-align: center;
-    padding: 50px 30px;
-}
-
-#minigame p {
-    text-align: center;
-}
-
-#minigame h2 {
-  margin-top: 10%;
 }
 
 img {
@@ -106,11 +57,26 @@ img {
     margin: 10px 0;
 }
 
-audio {
-    margin-top: 10px;
+#btnFS{
+  margin-right: auto;
+}
+
+#backToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #444;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  display: none;
 }
 
 /* ===== HEADER & NAVIGATION ===== */
+/*creates a bar on top with multiple buttons and hamburger icon if on mobile*/
 header {
     background-color: #2E7D32;
     color: white;
@@ -118,13 +84,12 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: fixed; /* fixed instead of relative */
-    top: 0; /* stick to top of page */
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 100%; /* full width */
-    z-index: 1000; /* stay above other content */
+    width: 100%;
+    z-index: 1000;
 }
-
 
 header h1 {
     font-size: 1.5rem;
@@ -161,7 +126,6 @@ header h1 {
     cursor: pointer;
 }
 
-
 .panel {
     display: none;
     animation: fadeIn 0.3s ease-in;
@@ -189,226 +153,9 @@ iframe {
     max-width: 100%;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media screen and (max-width: 800px) {
-    .nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        
-        left: 0;
-        width: 100%;
-        background-color: #2E7D32;
-        z-index: 1000;
-    }
+/* ===== END OF HEADER & NAVIGATION ===== */
 
-    .nav.show {
-        position: relative;
-        display: flex;
-    }
-
-    .nav-btn {
-        width: 100%;
-        text-align: left;
-        padding: 15px;
-        border-bottom: 1px solid #4CAF50;
-    }
-
-    .hamBtn {
-        display: block;
-    }
-
-    header {
-        flex-wrap: wrap;
-    }
-
-    #qrCodeImg{display:none;} /*hide QR code */
-h1{background: lightgreen;}
-h1::after{content:"(mobile)";}
-
-#qrcontent{
-  display: none;
-}
-}
-
-@media screen and (min-width: 900px) {
-    .nav {
-        display: flex !important;
-        flex-direction: row;
-        justify-content: center;
-        gap: 12px;
-    }
-
-    /* 3-column layout for cards */
-    .vitamin-cards,
-    .carb-types {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        justify-items: center;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    .vitamin-cards,
-    .carb-types {
-        grid-template-columns: repeat(3, minmax(220px, 1fr));
-        gap: 2rem;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    /* Force vertical nav menu */
-    .nav {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    /* Force single column cards */
-    .vitamin-cards,
-    .carb-types {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-}
-
-
-/* ==== Mini-Game Styles ==== */
-#game-container {
-    position: relative;
-    margin: 20px 0;
-    text-align: center;
-}
-
-canvas {
-    border: 3px solid #4CAF50;
-    background-color: #FFFFFF;
-}
-
-#mobile-controls {
-    display: none;
-    margin-top: 10px;
-}
-
-#mobile-controls button {
-    font-size: 1.5rem;
-    padding: 10px 20px;
-    margin: 0 10px;
-    background-color: #7dcfff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    user-select: none;
-}
-
-/* Score Board */
-#scoreBoard {
-    margin-top: 10px;
-}
-
-#scoreBoard p {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #333333;
-}
-
-/* Show controls on mobile */
-@media screen and (max-width: 800px) {
-    #mobile-controls {
-        display: block;
-    }
-}
-
-/* ==== Quiz Styles ==== */
-/* Quiz container */
-#quiz-container {
-  margin-top: 20px;
-  text-align: center;
-}
-
-#quiz h4 {
-  margin-top: 2%;
-}
-
-#quiz article {
-  margin-bottom: 10%;
-}
-
-/* Center submit button */
-#quiz-submit-btn {
-  display: block;
-  margin: 20px auto;
-}
-
-.quiz-question {
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-/* Keep question text always on top */
-.quiz-question-text {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-/* Desktop: 2 per row */
-.quiz-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
-.quiz-options label {
-  flex: 0 0 calc(50% - 10px);
-  text-align: left;
-}
-
-/* Mobile: stack vertically */
-@media screen and (max-width: 800px) {
-  .quiz-options label {
-    flex: 0 0 100%;
-  }
-  .quiz-options, .quiz-question {
-  margin-left: 5%;
-  
-}
-
-}
-
-
-
-
-#quiz-feedback {
-  font-weight: bold;
-  margin-top: 15px;
-}
-
-#quiz-submit-btn,
-#quiz-restart-btn {
-  display: block; 
-  margin: 20px auto;   
-  padding: 10px 20px;
-  background-color: #8BC34A;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-#quiz-submit-btn:hover,
-#quiz-restart-btn:hover {
-  background-color: #689F38;
-}
-
-
-.hidden {
-  display: none;
-}
+/* ===== HOME PAGE ===== */
 
 #home {
   position: relative;
@@ -426,24 +173,6 @@ canvas {
   padding: 20px;
 }
 
-@media screen and (max-width: 1854px){
-#home {
-  background-size: cover;
-  background-position: 0 0;
-}
-}
-
-
-
-
-#home .text-box {
-  background-color: rgba(57, 168, 100, 0.8);
-  padding: 20px 30px;
-  border-radius: 15px;
-  text-align: center;
-  max-width: 90%;
-}
-
 @keyframes animateBackground {
   from {
     background-position: 0% 0%;
@@ -453,26 +182,35 @@ canvas {
   }
 }
 
-
-#backToTopBtn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #444;
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  display: none;
+#home .text-box {
+  background-color: rgba(57, 168, 100, 0.8);
+  padding: 20px 30px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 90%;
 }
 
-ul {
-    margin: 0 auto;
-  padding: 0;
-  text-align: left;
-  max-width: 300px;
+#home h3{
+    text-align: center;
+    font-size: 32px;
+  border-radius: 15px;
+}
+
+#home p{
+    color: white;
+}
+
+/* ===== END OF HOME PAGE ===== */
+
+/* ===== MACRONUTRIENTS PAGE ===== */
+
+#macronutrients {
+    background-color: #e2ffd6;
+}
+
+#macronutrients p {
+    text-align: center;
+    padding: 50px 30px;
 }
 
 .macro-slider {
@@ -503,13 +241,6 @@ ul {
 }
 
 .macro-slide img{
-  display:block;
-  width: 300px;
-  height: auto;
-  margin: 10px auto;
-}
-
-.micro-slide img{
   display:block;
   width: 300px;
   height: auto;
@@ -568,6 +299,25 @@ ul {
   transform: translate(-50%, -130%);
 }
 
+/* ===== END OF MACRONUTRIENTS PAGE ===== */
+
+/* ===== MICRONUTRIENTS PAGE ===== */
+
+#micronutrients {
+    background-color: #e9e7f4;
+}
+
+#micronutrients p {
+    text-align: center;
+    padding: 50px 30px;
+}
+
+.micro-slide img{
+  display:block;
+  width: 300px;
+  height: auto;
+  margin: 10px auto;
+}
 
 .vitamin-tabs {
   display: flex;
@@ -620,6 +370,17 @@ ul {
   color: #333;
 }
 
+/* ===== END OF MICRONUTRIENTS PAGE ===== */
+
+/* ===== DIETARY GUIDELINES PAGE ===== */
+
+#minigame {
+    background-color: #bbffbb;
+}
+
+#quiz {
+    background-color: #a5f4ff;
+}
 
 .image-map {
   position: relative;
@@ -721,10 +482,6 @@ ul {
     padding: 50px 30px;
 }
 
-#btnFS{
-  margin-right: auto;
-}
-
 #bmi-calculator {
   margin-top: 20px;
   margin-bottom: 10px;
@@ -733,3 +490,217 @@ ul {
   border-radius: 8px;
   text-align: center;
 }
+
+/* ===== END OF DIETARY GUIDELINES PAGE ===== */
+
+/* ===== MINI-GAME PAGE ===== */
+
+#minigame p {
+    text-align: center;
+}
+
+#minigame h2 {
+  margin-top: 10%;
+}
+
+#game-container {
+    position: relative;
+    margin: 20px 0;
+    text-align: center;
+}
+
+canvas {
+    border: 3px solid #4CAF50;
+    background-color: #FFFFFF;
+}
+
+#mobile-controls {
+    display: none;
+    margin-top: 10px;
+}
+
+#mobile-controls button {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #7dcfff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    user-select: none;
+}
+
+#scoreBoard {
+    margin-top: 10px;
+}
+
+#scoreBoard p {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333333;
+}
+
+/* ===== END OF MINI-GAME PAGE ===== */
+
+/* ===== QUIZ PAGE ===== */
+
+#quiz-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#quiz h4 {
+  margin-top: 2%;
+}
+
+#quiz article {
+  margin-bottom: 10%;
+}
+
+#quiz-submit-btn {
+  display: block;
+  margin: 20px auto;
+}
+
+.quiz-question {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.quiz-question-text {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.quiz-options label {
+  flex: 0 0 calc(50% - 10px);
+  text-align: left;
+}
+
+#quiz-feedback {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+#quiz-submit-btn,
+#quiz-restart-btn {
+  display: block; 
+  margin: 20px auto;   
+  padding: 10px 20px;
+  background-color: #8BC34A;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#quiz-submit-btn:hover,
+#quiz-restart-btn:hover {
+  background-color: #689F38;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===== END OF QUIZ PAGE ===== */
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media screen and (max-width: 800px) {
+    .nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        
+        left: 0;
+        width: 100%;
+        background-color: #2E7D32;
+        z-index: 1000;
+    }
+
+    .nav.show {
+        position: relative;
+        display: flex;
+    }
+
+    .nav-btn {
+        width: 100%;
+        text-align: left;
+        padding: 15px;
+        border-bottom: 1px solid #4CAF50;
+    }
+
+    .hamBtn {
+        display: block;
+    }
+
+    header {
+        flex-wrap: wrap;
+    }
+
+    #qrCodeImg{display:none;}
+h1{background: lightgreen;}
+h1::after{content:"(mobile)";}
+
+#qrcontent{
+  display: none;
+}
+#mobile-controls {
+        display: block;
+    }
+
+    .quiz-options label {
+    flex: 0 0 100%;
+  }
+  .quiz-options, .quiz-question {
+  margin-left: 5%;
+  
+}
+
+.vitamin-cards,
+    .carb-types {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .nav {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        gap: 12px;
+    }
+    
+}
+
+@media screen and (min-width: 1200px) {
+    .vitamin-cards,
+    .carb-types {
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+        gap: 2rem;
+    }
+}
+
+@media screen and (max-width: 1854px){
+#home {
+  background-size: cover;
+  background-position: 0 0;
+}
+}
+
+/* ===== END OF RESPONSIVE DESIGN ===== */
