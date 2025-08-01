@@ -4,7 +4,6 @@ const panels = document.querySelectorAll('.panel');
 const hamBtn = document.getElementById('hamBtn');
 const navMenu = document.getElementById('main-nav');
 
-
 function stopGame() {
   cancelAnimationFrame(gameInterval);
   clearInterval(timerInterval);
@@ -24,8 +23,8 @@ function drawStartScreen() {
 }
 
 // ==== Page Navigation ====
-navButtons.forEach(button => {
-  button.addEventListener("click", () => {
+navButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
     const targetId = button.id.replace("-btn", "");
     const targetPanel = document.getElementById(targetId);
 
@@ -35,7 +34,9 @@ navButtons.forEach(button => {
     }
 
     // Hide all panels & show target panel
-    panels.forEach(panel => panel.classList.remove("active"));
+    panels.forEach(function (panel) {
+      panel.classList.remove("active");
+    });
     if (targetPanel) {
       targetPanel.classList.add("active");
     }
@@ -45,10 +46,9 @@ navButtons.forEach(button => {
       stopGame();
       drawStartScreen();
     }
-if (targetId === "quiz") {
+    if (targetId === "quiz") {
       restartQuiz();
     }
-    // ===== Smooth Scroll to section =====
     if (targetPanel) {
       const headerHeight = document.querySelector("header")?.offsetHeight || 0;
       window.scrollTo({
@@ -59,19 +59,16 @@ if (targetId === "quiz") {
   });
 });
 
-
-
 // ===== HamBtn Menu Toggle (Mobile) =====
-hamBtn.addEventListener('click', () => {
+hamBtn.addEventListener('click', function () {
   navMenu.classList.toggle('show');
 });
 
-
-document.addEventListener("DOMContentLoaded", () => {
-const clickSound = new Audio("audio/click.mp3");
+document.addEventListener("DOMContentLoaded", function () {
+  const clickSound = new Audio("audio/click.mp3");
 
   // Listen for clicks on the whole document
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", function (e) {
     // Only play if the clicked element is a <button>
     if (e.target.tagName === "BUTTON") {
       clickSound.currentTime = 0; // rewind to start
@@ -127,7 +124,7 @@ const clickSound = new Audio("audio/click.mp3");
     const container = document.getElementById("macroSlider");
     if (!container) return;
     container.innerHTML = "";
-    macronutrientData.forEach((macro, index) => {
+    macronutrientData.forEach(function (macro, index) {
       const slide = document.createElement("article");
       slide.className = `macro-slide ${index === 0 ? "active" : ""}`;
       slide.id = macro.id;
@@ -136,11 +133,13 @@ const clickSound = new Audio("audio/click.mp3");
         <p>${macro.text}</p>
         <img src="${macro.image}" alt="${macro.title} Image">
         <div class="carb-types">
-          ${macro.subcategories.map(sub => `
+          ${macro.subcategories.map(function (sub) {
+            return `
             <div class="carb-card">
               <h5>${sub.name}</h5>
               <div class="carb-popup"><p>${sub.description}</p></div>
-            </div>`).join("")}
+            </div>`;
+          }).join("")}
         </div>
       `;
       container.appendChild(slide);
@@ -179,7 +178,7 @@ const clickSound = new Audio("audio/click.mp3");
   };
 
   function renderDietaryGuidelines() {
-    document.querySelectorAll('.hotspot').forEach(hotspot => {
+    document.querySelectorAll('.hotspot').forEach(function (hotspot) {
       const id = hotspot.id;
       const data = dietaryGuidelinesData[id];
       if (!data) return;
@@ -192,11 +191,13 @@ const clickSound = new Audio("audio/click.mp3");
         <h5>Examples of foods: ${data.examples}</h5>
       `;
       hotspot.appendChild(card);
-      hotspot.addEventListener('click', () => {
-        document.querySelectorAll('.tooltip-card').forEach(c => c.classList.remove('active'));
+      hotspot.addEventListener('click', function () {
+        document.querySelectorAll('.tooltip-card').forEach(function (c) {
+          c.classList.remove('active');
+        });
         card.classList.add('active');
       });
-      card.querySelector('.tooltip-close').addEventListener('click', e => {
+      card.querySelector('.tooltip-close').addEventListener('click', function (e) {
         e.stopPropagation();
         card.classList.remove('active');
       });
@@ -237,7 +238,7 @@ const clickSound = new Audio("audio/click.mp3");
     const container = document.getElementById("vitaminCards");
     if (!container) return;
     container.innerHTML = "";
-    vitaminData[type].forEach(vit => {
+    vitaminData[type].forEach(function (vit) {
       const card = document.createElement("div");
       card.className = "vitamin-card";
       card.innerHTML = `
@@ -251,9 +252,13 @@ const clickSound = new Audio("audio/click.mp3");
     });
   }
 
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => renderVitamins(btn.dataset.type));
+  document.querySelectorAll(".tab-btn").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var type = btn.id.replace("btn-", "");
+    renderVitamins(type);
   });
+});
+
 
   /* ================================
      4. Init & Slider
@@ -264,21 +269,22 @@ const clickSound = new Audio("audio/click.mp3");
 
   let currentSlide = 0;
   function showSlide(index) {
-    document.querySelectorAll('.macro-slide').forEach((slide, i) => {
+    document.querySelectorAll('.macro-slide').forEach(function (slide, i) {
       slide.classList.toggle('active', i === index);
     });
   }
-  document.getElementById('nextMacro').addEventListener('click', () => {
+
+  document.getElementById('nextMacro').addEventListener('click', function () {
     const slides = document.querySelectorAll('.macro-slide');
     currentSlide = (currentSlide + 1) % slides.length;
     showSlide(currentSlide);
   });
-  document.getElementById('prevMacro').addEventListener('click', () => {
+
+  document.getElementById('prevMacro').addEventListener('click', function () {
     const slides = document.querySelectorAll('.macro-slide');
     currentSlide = (currentSlide - 1 + slides.length) % slides.length;
     showSlide(currentSlide);
   });
-
 });
 
 // ===== BMI Calculator =====
@@ -298,7 +304,6 @@ function calculateBMI() {
     return;
   }
 
-  // Convert cm to meters for BMI formula
   let heightMeters = height / 100;
   let bmi = weight / (heightMeters * heightMeters);
 
@@ -310,6 +315,7 @@ function calculateBMI() {
 
   bmiResult.innerHTML = `Your BMI is <strong>${bmi.toFixed(1)}</strong> - ${category}.`;
 }
+
 
 
 
@@ -355,8 +361,6 @@ foodImages.burger.src = "images/burger.png";
 const catchSound = new Audio("audio/correctcatch.mp3");
 const wrongCatch = new Audio("audio/wrongcatch.mp3");
 
-
-
 // ==== Controls ====
 const basketSpeed = 300; // pixels per second
 
@@ -365,28 +369,32 @@ let keys = {
   right: false
 };
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", function (e) {
   if (e.key === "ArrowLeft" || e.key === "a") keys.left = true;
   if (e.key === "ArrowRight" || e.key === "d") keys.right = true;
 });
 
-document.addEventListener("keyup", (e) => {
+document.addEventListener("keyup", function (e) {
   if (e.key === "ArrowLeft" || e.key === "a") keys.left = false;
   if (e.key === "ArrowRight" || e.key === "d") keys.right = false;
 });
 
-//Mobile controls
-document.getElementById("leftBtn").addEventListener("touchstart", (e) => {
+// Mobile controls
+document.getElementById("leftBtn").addEventListener("touchstart", function (e) {
   e.preventDefault();
   keys.left = true;
 });
-document.getElementById("rightBtn").addEventListener("touchstart", (e) => {
+document.getElementById("rightBtn").addEventListener("touchstart", function (e) {
   e.preventDefault();
   keys.right = true;
 });
 
-document.getElementById("leftBtn").addEventListener("touchend", () => keys.left = false);
-document.getElementById("rightBtn").addEventListener("touchend", () => keys.right = false);
+document.getElementById("leftBtn").addEventListener("touchend", function () {
+  keys.left = false;
+});
+document.getElementById("rightBtn").addEventListener("touchend", function () {
+  keys.right = false;
+});
 
 let lastTime = 0;
 function gameLoop(timestamp) {
@@ -399,18 +407,15 @@ function gameLoop(timestamp) {
 }
 
 // ==== Start Game ====
-
-canvas.addEventListener("click", () => {
+canvas.addEventListener("click", function () {
   if (!gameStarted || gameOver) {
     gameStarted = true;
     gameOver = false;
-    startGame(); // ensure timerInterval gets reset
+    startGame();
     lastTime = performance.now();
     requestAnimationFrame(gameLoop);
   }
 });
-
-
 
 function startGame() {
   fallingFoods = [];
@@ -419,19 +424,18 @@ function startGame() {
   timeLeft = 30;
   lastTime = 0;
   gameOver = false;
-  left = false;
-  right = false;
+  keys.left = false;
+  keys.right = false;
 
   document.getElementById("score").textContent = score;
   document.getElementById("timer").textContent = timeLeft;
   document.getElementById("lives").textContent = lives;
 
-  // Reset timers
   cancelAnimationFrame(gameInterval);
   clearInterval(timerInterval);
   timerInterval = null;
 
-  timerInterval = setInterval(() => {
+  timerInterval = setInterval(function () {
     if (!gameOver) {
       timeLeft--;
       document.getElementById("timer").textContent = timeLeft;
@@ -442,28 +446,27 @@ function startGame() {
   }, 1000);
 }
 
-if (!gameStarted){
-    // Draw start screen
-    ctx.fillStyle = "#696969ff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#00ff55ff";
-    ctx.font = "32px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("Click to Play!", canvas.width / 2, canvas.height / 2);
-    left = false;
-  right = false;
+if (!gameStarted) {
+  ctx.fillStyle = "#696969ff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#00ff55ff";
+  ctx.font = "32px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("Click to Play!", canvas.width / 2, canvas.height / 2);
+  keys.left = false;
+  keys.right = false;
 }
 
 function endGame() {
-    ctx.fillStyle = "#696969ff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#00ff55ff";
-    ctx.font = "32px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("Click to Restart", canvas.width / 2, canvas.height / 2 + 20);
+  ctx.fillStyle = "#696969ff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#00ff55ff";
+  ctx.font = "32px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("Click to Restart", canvas.width / 2, canvas.height / 2 + 20);
   gameOver = true;
-  left = false;
-  right = false;
+  keys.left = false;
+  keys.right = false;
   clearInterval(timerInterval);
   timerInterval = null;
   cancelAnimationFrame(gameInterval);
@@ -479,88 +482,78 @@ function stopGame() {
 
 // ==== Game Loop ====
 function updateGame(deltaTime) {
-ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-if (!gameStarted) {
-    return;
-  }
-
-  if (gameOver) {
-    return;
-  }
+  if (!gameStarted) return;
+  if (gameOver) return;
 
   ctx.drawImage(basketImage, basket.x, basket.y, basket.width, basket.height);
 
-  // Move basket smoothly
-if (keys.left) basket.x -= basketSpeed * deltaTime;
-if (keys.right) basket.x += basketSpeed * deltaTime;
+  // Move basket
+  if (keys.left) basket.x -= basketSpeed * deltaTime;
+  if (keys.right) basket.x += basketSpeed * deltaTime;
 
-// Keep basket within bounds
-basket.x = Math.max(0, Math.min(canvas.width - basket.width, basket.x));
-
+  // Keep within bounds
+  basket.x = Math.max(0, Math.min(canvas.width - basket.width, basket.x));
 
   // Spawn food
-if (Math.random() < deltaTime * 2.5) {
-  const foodPool = [
-    { type: "healthy", name: "carrot" },
-    { type: "healthy", name: "apple" },
-    { type: "healthy", name: "veggie" },
-    { type: "junk", name: "soda" },
-    { type: "junk", name: "burger" }
-  ];
+  if (Math.random() < deltaTime * 2.5) {
+    const foodPool = [
+      { type: "healthy", name: "carrot" },
+      { type: "healthy", name: "apple" },
+      { type: "healthy", name: "veggie" },
+      { type: "junk", name: "soda" },
+      { type: "junk", name: "burger" }
+    ];
 
-  const selected = foodPool[Math.floor(Math.random() * foodPool.length)];
+    const selected = foodPool[Math.floor(Math.random() * foodPool.length)];
 
-  fallingFoods.push({
-    x: Math.random() * (canvas.width - 40),
-    y: -40,
-    width: 40,
-    height: 40,
-    speed: 80 + Math.random() * 40,
-    type: selected.type,
-    name: selected.name
-  });
-}
-
+    fallingFoods.push({
+      x: Math.random() * (canvas.width - 40),
+      y: -40,
+      width: 40,
+      height: 40,
+      speed: 80 + Math.random() * 40,
+      type: selected.type,
+      name: selected.name
+    });
+  }
 
   // Update food
-for (let i = fallingFoods.length - 1; i >= 0; i--) {
-  const food = fallingFoods[i];
-  food.y += food.speed * deltaTime;
+  for (let i = fallingFoods.length - 1; i >= 0; i--) {
+    const food = fallingFoods[i];
+    food.y += food.speed * deltaTime;
 
-  // Draw food image
-  const img = foodImages[food.name];
-  if (img) {
-    ctx.drawImage(img, food.x, food.y, food.width, food.height);
-  }
-
-  // Collision check
-  const basketBottom = basket.y + basket.height;
-  const foodBottom = food.y + food.height;
-
-  if (
-    foodBottom >= basket.y &&
-    food.x + food.width > basket.x &&
-    food.x < basket.x + basket.width
-  ) {
-    if (food.type === "healthy") {
-      catchSound.currentTime = 0;
-    catchSound.play();
-      score++;
-    } else {
-wrongCatch.currentTime = 0;
-    wrongCatch.play();
-      lives--;
+    const img = foodImages[food.name];
+    if (img) {
+      ctx.drawImage(img, food.x, food.y, food.width, food.height);
     }
-    
 
-    document.getElementById("score").textContent = score;
-    document.getElementById("lives").textContent = lives;
-    fallingFoods.splice(i, 1);
-  } else if (food.y > canvas.height) {
-    fallingFoods.splice(i, 1);
+    const basketBottom = basket.y + basket.height;
+    const foodBottom = food.y + food.height;
+
+    if (
+      foodBottom >= basket.y &&
+      food.x + food.width > basket.x &&
+      food.x < basket.x + basket.width
+    ) {
+      if (food.type === "healthy") {
+        catchSound.currentTime = 0;
+        catchSound.play();
+        score++;
+      } else {
+        wrongCatch.currentTime = 0;
+        wrongCatch.play();
+        lives--;
+      }
+
+      document.getElementById("score").textContent = score;
+      document.getElementById("lives").textContent = lives;
+      fallingFoods.splice(i, 1);
+    } else if (food.y > canvas.height) {
+      fallingFoods.splice(i, 1);
+    }
   }
-}
 }
 
 
@@ -612,39 +605,38 @@ const wrongChoice = new Audio("audio/wronganswer.mp3");
 function renderFullQuiz() {
   quizContainer.innerHTML = "";
 
-  quizData.forEach((q, index) => {
+  quizData.forEach(function (q, index) {
     const questionDiv = document.createElement("div");
     questionDiv.classList.add("quiz-question");
 
     questionDiv.innerHTML = `
-  <p><strong>${q.question}</strong></p>
-  <div class="quiz-options">
-    ${q.options
-      .map(
-        (opt, i) => `
-        <label>
-          <input type="radio" name="q${index}" value="${i}">
-          ${opt}
-        </label>
-      `
-      )
-      .join("")}
-  </div>
-`;
-
+      <p><strong>${q.question}</strong></p>
+      <div class="quiz-options">
+        ${q.options
+          .map(function (opt, i) {
+            return `
+              <label>
+                <input type="radio" name="q${index}" value="${i}">
+                ${opt}
+              </label>
+            `;
+          })
+          .join("")}
+      </div>
+    `;
 
     quizContainer.appendChild(questionDiv);
   });
 }
 
 // Handle form submit
-quizForm.addEventListener("submit", (e) => {
+quizForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
   let score = 0;
   let unanswered = 0;
 
-  quizData.forEach((q, index) => {
+  quizData.forEach(function (q, index) {
     const selected = quizForm.querySelector(`input[name="q${index}"]:checked`);
     if (!selected) {
       unanswered++;
@@ -658,11 +650,10 @@ quizForm.addEventListener("submit", (e) => {
     feedbackEl.style.color = "red";
     return;
   }
-  if(score >= 6)
-  {
+
+  if (score >= 6) {
     correctChoice.play();
-  }
-  else{
+  } else {
     wrongChoice.play();
   }
 
@@ -673,7 +664,7 @@ quizForm.addEventListener("submit", (e) => {
 });
 
 // Restart quiz
-restartBtn.addEventListener("click", () => {
+restartBtn.addEventListener("click", function () {
   quizForm.classList.remove("hidden");
   endScreen.classList.add("hidden");
   feedbackEl.textContent = "";
@@ -684,48 +675,43 @@ restartBtn.addEventListener("click", () => {
 // Initial render
 renderFullQuiz();
 
-
-
-
 function scrollToTop() {
   window.scrollTo(0, 0);
 }
 
 // Show/hide button when scrolling
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll", function () {
   const btn = document.getElementById("backToTopBtn");
   const nearBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 100;
-
   btn.style.display = nearBottom ? "block" : "none";
 });
 
-const btnFS=document.querySelector("#btnFS");
+const btnFS = document.querySelector("#btnFS");
 let fullscreenToggle = false;
-btnFS.addEventListener("click",enterFullscreen);
-function enterFullscreen() { //must be called by user generated event
-  if(fullscreenToggle == false)
-  {
-if (document.documentElement.requestFullscreen) {
-document.documentElement.requestFullscreen();
-} else if (document.documentElement.mozRequestFullScreen) { // Firefox
-document.documentElement.mozRequestFullScreen();
-} else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-document.documentElement.webkitRequestFullscreen();
-} else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-document.documentElement.msRequestFullscreen();
-}
-fullscreenToggle = true;
+btnFS.addEventListener("click", enterFullscreen);
+
+function enterFullscreen() { 
+  if (fullscreenToggle === false) {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+      document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+      document.documentElement.msRequestFullscreen();
+    }
+    fullscreenToggle = true;
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari, and Opera
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE/Edge
+      document.msExitFullscreen();
+    }
+    fullscreenToggle = false;
   }
-else{
-if (document.exitFullscreen) {
-document.exitFullscreen();
-} else if (document.mozCancelFullScreen) { // Firefox
-document.mozCancelFullScreen();
-} else if (document.webkitExitFullscreen) { // Chrome, Safari, and Opera
-document.webkitExitFullscreen();
-} else if (document.msExitFullscreen) { // IE/Edge
-document.msExitFullscreen();
-}
-fullscreenToggle = false;
-}
 }

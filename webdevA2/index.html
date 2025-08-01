@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no,FullScreen">
   <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
   <title>nutrition</title>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" >
+  <link rel="manifest" href="manifest.json" >
   <script src="main.js" defer></script>
 </head>
 <body>
@@ -34,15 +34,15 @@
     <section id="home" class="panel active">
   <div class="text-box">
     <h2>Welcome to Nutrition Explorer!</h2>
-    <p>Learn about healthy eating, nutrients, and food choices.
+    <p>Learn about healthy eating, nutrients, and food choices.</p>
       <div>
       <h2 id="qrcontent">Scan the code below to go to mobile page!</h2></div>
-    </p>
+    
   </div>
   <footer>
     
 
-<img id="qrCodeImg" src="images/qrcode_awxccc.github.io.png">
+<img id="qrCodeImg" src="images/qrcode_awxccc.github.io.png" alt="QRCODE Image">
 </footer>
 </section>
 
@@ -50,11 +50,10 @@
     <!-- MACRONUTRIENTS -->
 <section id="macronutrients" class="panel">
   <h3>Macronutrients</h3>
-  <div id="macro-video">
+  <div>
     <iframe width="560" height="315"
       src="https://www.youtube.com/embed/smPR215SRzM?si=t8QKTlfnyYgA2cNu"
       title="YouTube video player"
-      frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerpolicy="strict-origin-when-cross-origin"
       allowfullscreen>
@@ -62,8 +61,8 @@
   </div>
 
   <div class="slider-controls">
-    <button id="prevMacro"><</button>
-    <button id="nextMacro">></button>
+    <button id="prevMacro">&lt;</button>
+    <button id="nextMacro">&gt;</button>
   </div>
 
   <div class="macro-slider" id="macroSlider"></div>
@@ -74,18 +73,19 @@
     <!-- MICRONUTRIENTS -->
     <section id="micronutrients" class="panel">
   <h3>Micronutrients</h3>
-  <div id="macro-video">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/fX_wJflOoAA?si=CTHiI7SnW40L-5Lq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <div >
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/fX_wJflOoAA?si=CTHiI7SnW40L-5Lq" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
   <p>
     Micronutrients are essential vitamins and minerals needed by the body in small amounts for optimal health, growth, and development.<br>They play crucial roles in various bodily functions, including enzyme production, hormone regulation, and cellular processes.<br>Deficiencies in micronutrients can lead to a range of health problems, some of which can be severe.
     <br>There are 4 types: Water-soluble vitamins, Fat-soluble vitamins, Macrominerals, and Trace minerals.
   </p>
   <div class="vitamin-tabs">
-    <button class="tab-btn" data-type="water">Water-Soluble</button>
-<button class="tab-btn" data-type="fat">Fat-Soluble</button>
-<button class="tab-btn" data-type="macro">Macrominerals</button>
-<button class="tab-btn" data-type="trace">Trace Minerals</button>
+    <button class="tab-btn" id="btn-water">Water-Soluble</button>
+<button class="tab-btn" id="btn-fat">Fat-Soluble</button>
+<button class="tab-btn" id="btn-macro">Macrominerals</button>
+<button class="tab-btn" id="btn-trace">Trace Minerals</button>
+
 
   </div>
 
@@ -103,7 +103,7 @@
         <br><a href="https://www.healthhub.sg/programmes/nutrition-hub/eat-more" target="_blank" rel="noopener noreferrer">Click this link to find out more!</a>
       </p>
       <div class="image-map">
-  <img src="images/dietaryguidelines.jpg" alt="Dietary Guidelines" />
+  <img src="images/dietaryguidelines.jpg" alt="Dietary Guidelines" >
   <!-- Hotspots only -->
   <div id="FruitsMap" class="hotspot"></div>
   <div id="GrainsMap" class="hotspot"></div>

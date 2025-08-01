@@ -78,6 +78,10 @@ h5{
     color: white;
 }
 
+p{
+  font-size: large;
+}
+
 #macronutrients p {
     text-align: center;
     padding: 50px 30px;
@@ -218,11 +222,6 @@ iframe {
         flex-wrap: wrap;
     }
 
-    li{
-        padding: 0 1em;
-        font: size 0.9rem;
-    }
-
     #qrCodeImg{display:none;} /*hide QR code */
 h1{background: lightgreen;}
 h1::after{content:"(mobile)";}
@@ -301,8 +300,6 @@ canvas {
     border: none;
     border-radius: 5px;
     user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
 }
 
 /* Score Board */
@@ -331,7 +328,7 @@ canvas {
 }
 
 #quiz h4 {
-  margin-top: 10%;
+  margin-top: 2%;
 }
 
 #quiz article {
@@ -569,7 +566,6 @@ ul {
 .carb-card:hover .carb-popup {
   opacity: 1;
   transform: translate(-50%, -130%);
-  pointer-events: auto;
 }
 
 

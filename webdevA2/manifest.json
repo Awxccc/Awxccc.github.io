@@ -1,5 +1,5 @@
 { "name": "WebDev A2 PWA",
-"short_name": "A2PWA",
+"short_name": "WDA2PWA",
 "start_url": "index.html",
 "display": "standalone",
 "background_color": "#ffffff",
