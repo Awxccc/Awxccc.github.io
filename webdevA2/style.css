@@ -375,6 +375,11 @@ canvas {
   .quiz-options label {
     flex: 0 0 100%;
   }
+  .quiz-options, .quiz-question {
+  margin-left: 5%;
+  
+}
+
 }
 
 
