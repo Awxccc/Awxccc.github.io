@@ -527,7 +527,6 @@ function endGame() {
 	clearInterval(timerInterval);
 	timerInterval = null;
 	cancelAnimationFrame(gameInterval);
-	alert("Your score: " + score);
 }
 
 /* Renders the basket and fruits, updates the game state  and checks conditions*/
