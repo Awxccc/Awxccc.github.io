@@ -68,6 +68,16 @@ hamBtn.addEventListener('click', () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+const clickSound = new Audio("audio/click.mp3");
+
+  // Listen for clicks on the whole document
+  document.addEventListener("click", (e) => {
+    // Only play if the clicked element is a <button>
+    if (e.target.tagName === "BUTTON") {
+      clickSound.currentTime = 0; // rewind to start
+      clickSound.play();
+    }
+  });
 
   /* ================================
      1. Macronutrients
@@ -271,6 +281,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+// ===== BMI Calculator =====
+const heightField = document.querySelector("#heightField");
+const weightField = document.querySelector("#weightField");
+const bmiResult = document.querySelector("#bmi-result");
+const bmiButton = document.querySelector("#calcBMI");
+
+bmiButton.addEventListener("click", calculateBMI);
+
+function calculateBMI() {
+  let height = parseFloat(heightField.value);
+  let weight = parseFloat(weightField.value);
+
+  if (!height || !weight || height <= 0 || weight <= 0) {
+    bmiResult.innerHTML = "Please enter valid height and weight.";
+    return;
+  }
+
+  // Convert cm to meters for BMI formula
+  let heightMeters = height / 100;
+  let bmi = weight / (heightMeters * heightMeters);
+
+  let category = "";
+  if (bmi < 18.5) category = "Underweight";
+  else if (bmi < 25) category = "Normal weight";
+  else if (bmi < 30) category = "Overweight";
+  else category = "Obese";
+
+  bmiResult.innerHTML = `Your BMI is <strong>${bmi.toFixed(1)}</strong> - ${category}.`;
+}
 
 
 
@@ -313,7 +352,7 @@ foodImages.soda.src = "images/soda.png";
 foodImages.burger.src = "images/burger.png";
 
 // === Sounds ===
-const catchSound = new Audio("audio/basket_catch.mp3");
+const catchSound = new Audio("audio/correctcatch.mp3");
 const wrongCatch = new Audio("audio/wrongcatch.mp3");
 
 
@@ -525,159 +564,127 @@ wrongCatch.currentTime = 0;
 }
 
 
-// ==== QUIZ GAME LOGIC ====
+// ==== QUIZ LOGIC ====
 const quizData = [
   {
-    question: "Which nutrient provides energy?",
+    question: "1. Which nutrient provides energy?",
     options: ["Vitamins", "Proteins", "Carbohydrates", "Minerals"],
     answer: 2,
   },
   {
-    question: "Which is a good source of protein?",
+    question: "2. Which is a good source of protein?",
     options: ["Candy", "Chicken", "Butter", "Soda"],
     answer: 1,
   },
   {
-    question: "Unsaturated fats are considered:",
-    options: ["Healthy fats", "Unhealthy fats", "Empty calories", "Sugary fats"],
-    answer: 0
-  },
-  {
-    question: "According to the dietary guidelines, how much of your plate should be fruits?",
+    question: "3. According to the dietary guidelines, how much of your plate should be fruits?",
     options: ["Half", "Quarter", "Three-quarters", "None"],
     answer: 1
   },
   {
-    question: "Wholegrains are a good source of:",
+    question: "4. Wholegrains are a good source of:",
     options: ["Protein", "Carbohydrates", "Vitamin C", "Fats"],
     answer: 1
   },
   {
-    question: "How many cups of water per day is generally recommended for men?",
-    options: ["5 cups", "8 cups", "15.5 cups", "25 cups"],
-    answer: 2
-  },
-  {
-    question: "Which vitamin helps your body absorb calcium?",
-    options: ["Vitamin K", "Vitamin C", "Vitamin D", "Vitamin A"],
-    answer: 2
-  },
-  {
-    question: "Which mineral helps carry oxygen in the blood?",
-    options: ["Iron", "Zinc", "Calcium", "Magnesium"],
-    answer: 0
-  },
-  {
-    question: "Vitamin C is found in which food?",
+    question: "5. Vitamin C is found in which food?",
     options: ["Oranges", "Bread", "Cheese", "Rice"],
     answer: 0,
   },
   {
-    question: "Vitamin A is important for:",
+    question: "6. Vitamin A is important for:",
     options: ["Energy production", "Vision", "Bone strength", "Digestive health"],
     answer: 1
   }
 ];
 
-let currentQuestion = 0;
-let quizScore = 0;
+const quizForm = document.getElementById("quiz-form");
+const quizContainer = document.getElementById("quiz-container");
+const feedbackEl = document.getElementById("quiz-feedback");
+const scoreEl = document.getElementById("quiz-score");
+const endScreen = document.getElementById("quiz-end-screen");
+const restartBtn = document.getElementById("quiz-restart-btn");
+
 const correctChoice = new Audio("audio/correctanswer.mp3");
 const wrongChoice = new Audio("audio/wronganswer.mp3");
 
-const questionEl = document.getElementById("quiz-question");
-const optionsEl = document.getElementById("quiz-options");
-const feedbackEl = document.getElementById("quiz-feedback");
-const nextBtn = document.getElementById("quiz-next-btn");
-const restartBtn = document.getElementById("quiz-restart-btn");
-const endScreen = document.getElementById("quiz-end-screen");
-const scoreEl = document.getElementById("quiz-score");
+// Render all questions at once
+function renderFullQuiz() {
+  quizContainer.innerHTML = "";
 
-function showQuestion() {
-  const data = quizData[currentQuestion];
-  questionEl.textContent = data.question;
-  optionsEl.innerHTML = "";
-  feedbackEl.textContent = "";
-  nextBtn.classList.add("hidden");
+  quizData.forEach((q, index) => {
+    const questionDiv = document.createElement("div");
+    questionDiv.classList.add("quiz-question");
 
-  // Show submit button
-  document.getElementById("quiz-submit-btn").classList.remove("hidden");
+    questionDiv.innerHTML = `
+  <p><strong>${q.question}</strong></p>
+  <div class="quiz-options">
+    ${q.options
+      .map(
+        (opt, i) => `
+        <label>
+          <input type="radio" name="q${index}" value="${i}">
+          ${opt}
+        </label>
+      `
+      )
+      .join("")}
+  </div>
+`;
 
-  data.options.forEach((opt, index) => {
-    const label = document.createElement("label");
-    label.style.display = "block";
 
-    const radio = document.createElement("input");
-    radio.type = "radio";
-    radio.name = "quiz-option";
-    radio.value = index;
-
-    label.appendChild(radio);
-    label.appendChild(document.createTextNode(" " + opt));
-    optionsEl.appendChild(label);
+    quizContainer.appendChild(questionDiv);
   });
 }
 
-function checkAnswer() {
-  const selected = document.querySelector('input[name="quiz-option"]:checked');
-  if (!selected) {
-    feedbackEl.textContent = "❗ Please select an answer.";
-    feedbackEl.style.color = "orange";
+// Handle form submit
+quizForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  let score = 0;
+  let unanswered = 0;
+
+  quizData.forEach((q, index) => {
+    const selected = quizForm.querySelector(`input[name="q${index}"]:checked`);
+    if (!selected) {
+      unanswered++;
+    } else if (parseInt(selected.value) === q.answer) {
+      score++;
+    }
+  });
+
+  if (unanswered > 0) {
+    feedbackEl.textContent = `❗ You missed ${unanswered} question(s). Please answer all before submitting.`;
+    feedbackEl.style.color = "red";
     return;
   }
-
-  const selectedIndex = parseInt(selected.value);
-  const correct = quizData[currentQuestion].answer;
-
-  if (selectedIndex === correct) {
-    quizScore++;
+  if(score >= 6)
+  {
     correctChoice.play();
-    feedbackEl.textContent = "✅ Correct!";
-    feedbackEl.style.color = "green";
-  } else {
+  }
+  else{
     wrongChoice.play();
-    feedbackEl.textContent = "❌ Incorrect.";
-    feedbackEl.style.color = "red";
   }
 
-  // Disable all radios
-  document.querySelectorAll('input[name="quiz-option"]').forEach(r => r.disabled = true);
-
-  // Hide submit, show next
-  document.getElementById("quiz-submit-btn").classList.add("hidden");
-  nextBtn.classList.remove("hidden");
-  window.scrollTo(0, document.body.scrollHeight);
-}
-
-
-function nextQuestion() {
-  currentQuestion++;
-  if (currentQuestion < quizData.length) {
-    showQuestion();
-  } else {
-    endQuiz();
-  }
-}
-
-function endQuiz() {
-  questionEl.textContent = "Quiz finished!";
-  optionsEl.innerHTML = "";
   feedbackEl.textContent = "";
-  nextBtn.classList.add("hidden");
+  scoreEl.textContent = `You scored ${score} out of ${quizData.length}`;
   endScreen.classList.remove("hidden");
-  scoreEl.textContent = `You scored ${quizScore} out of ${quizData.length}`;
-}
+  quizForm.classList.add("hidden");
+});
 
-function restartQuiz() {
-  currentQuestion = 0;
-  quizScore = 0;
+// Restart quiz
+restartBtn.addEventListener("click", () => {
+  quizForm.classList.remove("hidden");
   endScreen.classList.add("hidden");
-  showQuestion();
-}
+  feedbackEl.textContent = "";
+  quizForm.reset();
+  renderFullQuiz();
+});
 
-// Button actions
-nextBtn.addEventListener("click", nextQuestion);
-restartBtn.addEventListener("click", restartQuiz);
-document.getElementById("quiz-submit-btn").addEventListener("click", checkAnswer);
+// Initial render
+renderFullQuiz();
+
+
 
 
 function scrollToTop() {

@@ -112,6 +112,17 @@
   <div id="WaterMap" class="hotspot"></div>
 </div>
 
+<div id="bmi-calculator">
+  <h4>BMI Calculator</h4>
+  <p>Enter your height and weight to check your Body Mass Index.</p>
+  
+  <input id="heightField" type="number" placeholder="Height in cm">
+  <input id="weightField" type="number" placeholder="Weight in kg">
+  
+  <button id="calcBMI">Calculate BMI</button>
+  
+  <p class="msg-box" id="bmi-result">Enter height and weight, then press Calculate.</p>
+</div>
 
       
     </section>
@@ -144,21 +155,22 @@
 <section id="quiz" class="panel">
   <h4>Nutrition Quiz</h4>
   <p>Take this quiz to test what you’ve learned.</p>
-  <div id="quiz-container">
-    <fieldset>
-    <div id="quiz-question"></div>
-    <div id="quiz-options"></div>
-    </fieldset>
-    <button id="quiz-submit-btn">Submit Answers</button>
+
+  <form id="quiz-form">
+    <div id="quiz-container"></div>
     <div id="quiz-feedback"></div>
-    <button id="quiz-next-btn" class="hidden">Next</button>
-    <div id="quiz-end-screen" class="hidden">
-      <p id="quiz-score"></p>
-      <button id="quiz-restart-btn">Try Again</button>
-    </div>
+    <button type="submit" id="quiz-submit-btn">Submit Quiz</button>
+  </form>
+
+  
+  <div id="quiz-end-screen" class="hidden">
+    <p id="quiz-score"></p>
+    <button type="button" id="quiz-restart-btn">Try Again</button>
   </div>
-  <article>Choose one 1 out of 4 choices</article>
+
 </section>
+
+
 
   </main>
 
